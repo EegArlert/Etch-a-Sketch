@@ -1,6 +1,8 @@
 body{
     display: flex;
     justify-content: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
 }
 
 .square{
@@ -28,4 +30,9 @@ body{
     min-height: 161px;
     width: 496px;
     height: 496px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
 }
