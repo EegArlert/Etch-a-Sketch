@@ -1,46 +1,51 @@
 const gridContainer = document.querySelector(".container-grid");
-const button = document.querySelector(".pixel-size");
+const btnEditSize = document.querySelector(".pixel-size");
+const btnReset = document.querySelector(".btn-reset");
 
 
-//creating 16x16 grid via div
-createGrid(16);
-startSketching();
+//function to start the game
+function etchASketch() {
+    let currentSize = 16;
+    
+    newGrid(currentSize);
 
+    btnEditSize.addEventListener("click", () => {
+        let userAns = prompt("How many number of squares? (max = 100 box)");
+        
+        if (userAns == null) {
+            return
+        }
+
+        if (userAns > 100) {
+            alert("Enter number lower than 101");
+            return
+        }
+        currentSize = userAns
+        
+        resetGrid();
+        newGrid(userAns)
+        startSketching();
+    });
+
+    btnReset.addEventListener("click", () => {
+        resetGrid();
+        newGrid(currentSize);
+        startSketching();
+    })
+
+    startSketching();
+}
+
+//starting the game
+etchASketch();
+
+//function resetGrid by deleting all of the child nodes
 function resetGrid() {
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.lastChild)
     }
 }
 
-function changeGrid(size){
-    resetGrid();
-    
-    for(let i = 0; i < size; i++){
-        for(let k = 0; k < size; k++){
-            gridContainer.appendChild()
-        }
-    }
-}
-
-
-button.addEventListener("click", () => {
-    let userAns = prompt("How many number of squares?");
-
-    if (userAns == null) {
-        return
-    }
-    while (gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.lastChild)
-    }
-
-    for (let i = 0; i < userAns; i++) {
-        for (let k = 0; k < userAns; k++) {
-            const newSquare = document.createElement("div");
-            newSquare.className = "square"
-            gridContainer.appendChild(newSquare);
-        }
-    }
-});
 
 
 function startSketching() {
@@ -50,10 +55,12 @@ function startSketching() {
             square.style.backgroundColor = "black"; // Color stays black after hover
         });
     }
-    )
+)
 }
 
-function createGrid(size){
+function createGrid(size) {
+    resetGrid();
+    
     for (let i = 1; i <= size; i++) {
         for (let k = 1; k <= size; k++) {
             const div = document.createElement("div");
@@ -62,3 +69,24 @@ function createGrid(size){
         }
     }
 }
+
+function newGrid(size) {
+    createGrid(size);
+    adjustGridSize(size);
+}
+
+
+//changing the grid size based on user input
+function adjustGridSize(size){
+    let newHeight = 495 / size;
+    let newWidth = 495 / size;
+
+    let squares = document.querySelectorAll(".square");
+
+    squares.forEach(square => {
+        square.style.height = newHeight.toString() + "px";
+        square.style.width = newWidth.toString() + "px";
+    });
+}
+
+

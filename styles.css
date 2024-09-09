@@ -10,8 +10,10 @@ body{
     width: 30px;
     background-color: rgb(195, 70, 116);
     border-style: solid;
-    border-width: 0.5px;
+    border-width: 0.1px;
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     /* aspect-ratio: 1/1; */
 }
 /* 
@@ -22,8 +24,9 @@ body{
 .container-grid {
     display: flex;
     flex-wrap: wrap;
-    width: 496px;
-    max-height: 496px;
+    width: 495px;
+    height: 495px;
+    flex-basis: 495px
 }
 
 .title {
@@ -38,7 +41,7 @@ body{
     flex: 0 0 auto;
 }
 
-.pixel-size{
+button{
     height: 50px;
     width: 100px;
     margin-top: 20px;
@@ -47,6 +50,7 @@ body{
     border-width: 1px;
     border-color: rgb(55, 55, 187);
     border-radius: 10px;
+    margin: 15px 15px 20px 15px;
 }
 
 .pixel-size:hover{
